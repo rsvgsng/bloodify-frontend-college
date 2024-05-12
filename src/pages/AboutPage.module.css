@@ -1,0 +1,21 @@
+.about__section {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.head__abt h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.about__content p {
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+    margin-bottom: 20px;
+}

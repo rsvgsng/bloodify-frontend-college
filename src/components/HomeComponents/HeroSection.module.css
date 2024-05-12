@@ -1,0 +1,84 @@
+.main__section {
+    border-top-left-radius: 200px;
+    z-index: -1;
+}
+
+.hero__section {
+    margin: 0 auto;
+    width: 70%;
+    padding: 20px;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 50px;
+}
+
+.left__item {
+    display: flex;
+    flex-direction: column;
+}
+
+.big__hero__text {
+    margin-bottom: 20px;
+}
+
+.big__hero__text h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 50px;
+    font-weight: 700;
+
+}
+
+.decs__hero__ {
+    width: 70%;
+}
+
+.decs__hero__ p {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Poppins", sans-serif;
+    color: #333;
+    margin-bottom: 20px;
+
+}
+
+.donate__now__btn {
+    margin-top: 20px;
+
+}
+
+.right__item {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image__hero {
+    width: 400px;
+    height: 400px;
+}
+
+.donate__now__btn button {
+    background-color: #e91e63;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.donate__now__btn button svg {
+    margin-left: 10px;
+}

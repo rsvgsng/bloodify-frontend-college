@@ -1,0 +1,46 @@
+.donation__process__section {
+    margin-bottom: 10px;
+}
+
+.dp__container {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.dp__container {
+    padding-top: 30px;
+}
+
+
+
+.dp__dp {
+    display: flex;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.dp__item {
+    margin-right: 20px;
+}
+
+.dp__item {
+    width: 30%;
+    padding: 20px;
+    border: 1px solid #f1f1f1;
+    border-radius: 10px;
+    margin-bottom: 40px;
+
+
+}
+
+.dp__item h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.dp__item h1 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}

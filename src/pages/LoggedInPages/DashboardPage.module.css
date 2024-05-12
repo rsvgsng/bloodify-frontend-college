@@ -1,0 +1,22 @@
+.dasboard__container {
+    width: 75%;
+    margin: 0 auto;
+    margin-top: 30px;
+    /* border: 1px solid black; */
+}
+
+.section1__container {
+    display: flex;
+}
+
+.left__sec1__item {
+    width: 40%;
+    padding: 20px;
+    /* border: 1px solid black; */
+}
+
+.right__sec1__item {
+    width: 60%;
+    padding: 20px;
+    /* border: 1px solid black; */
+}
