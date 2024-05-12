@@ -1,15 +1,42 @@
 import React from 'react'
 import style from './SignupPage.module.css'
 import signupimg from '../Assets/signup.png'
+import { API_ROUTE } from '../utils/Constants'
+import toast from 'react-hot-toast';
 
 function LoginPage() {
-  function handleform(e: React.FormEvent<HTMLFormElement>) {
+
+
+  async function handleform(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = e.currentTarget
     const data = new FormData(form)
     const username = data.get('username')
     const password = data.get('password')
-    console.log({ username, password })
+    if (!username || !password) return toast.error('Please fill all fields', {
+      duration: 4000,
+      position: 'top-center',
+    })
+
+    let p = await fetch(API_ROUTE + '/auth/login', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    })
+    let res = await p.json()
+    if (res.statusCode == 200) {
+      localStorage.setItem('token', res.data)
+      window.location.reload()
+    } else {
+      console.log(res)
+      toast.error(res.message, {
+        duration: 4000,
+        position: 'top-center',
+
+      })
+    }
 
   }
   return (
@@ -31,8 +58,7 @@ function LoginPage() {
 
             <button
               onClick={() => {
-                localStorage.setItem('token', '123')
-                window.location.reload()
+                handleform
               }}
               type="submit">Login</button>
           </form>

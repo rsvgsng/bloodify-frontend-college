@@ -13,13 +13,14 @@ import SearchBloodPage from './pages/LoggedInPages/SearchBloodPage'
 import BloodbankPage from './pages/LoggedInPages/BloodbankPage'
 import SingleNewsPage from './pages/LoggedInPages/SingleNewsPage'
 import RequestBloodPage from './pages/LoggedInPages/RequestBloodPage'
-
+import { Toaster } from 'react-hot-toast'
 export let isLoggedin = localStorage.getItem('token') ? true : false
 
 function App() {
-
   if (isLoggedin) return (
     <React.Fragment>
+      <Toaster />
+
       <Routes>
         <Route path="/" element={<Layout />} >
           <Route path="/" element={<DashboardPage />} />
@@ -40,6 +41,8 @@ function App() {
 
   return (
     <React.Fragment>
+      <Toaster />
+
       <Routes>
         <Route path="/" element={<Layout />} >
           <Route path="/" element={<HomePage />} />
