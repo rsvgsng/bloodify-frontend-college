@@ -11,12 +11,21 @@ export const getBloodRequest = createAsyncThunk("get/getBloodRequest", async () 
         },
     });
     const data = await response.json();
-    if (data.statusCode === 401) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('cart');
-        window.location.reload();
-    }
+
     return data;
+});
+
+export const searchBlood = createAsyncThunk("get/searchBlood", async (data: any) => {
+    const response = await fetch(`${API_ROUTE}/main/searchBlood`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
+        body: JSON.stringify(data)
+    });
+    const res = await response.json();
+    return res;
 });
 
 export const mainSlice = createSlice({
@@ -24,6 +33,11 @@ export const mainSlice = createSlice({
     initialState: {
         bloodRequestData: [],
         bloodRequestDataLoading: false,
+
+
+        searchBloodData: [],
+        searchBloodDataLoading: false,
+
     },
     reducers: {
 
@@ -39,7 +53,19 @@ export const mainSlice = createSlice({
             })
             .addCase(getBloodRequest.rejected, (state) => {
                 state.bloodRequestDataLoading = false;
-            });
+            })
+
+            .addCase(searchBlood.pending, (state) => {
+                state.searchBloodDataLoading = true;
+            })
+            .addCase(searchBlood.fulfilled, (state, action) => {
+                state.searchBloodData = action.payload;
+                state.searchBloodDataLoading = false;
+            })
+            .addCase(searchBlood.rejected, (state) => {
+                state.searchBloodDataLoading = false;
+            })
+
 
     },
 });

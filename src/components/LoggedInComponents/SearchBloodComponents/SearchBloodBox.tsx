@@ -2,6 +2,8 @@
 import React from 'react'
 import style from './SearchBloodBox.module.css'
 import { FaSearch } from "react-icons/fa";
+import { useDispatch } from 'react-redux';
+import { searchBlood } from '../../../features/mainSlice';
 
 export const districtsOfNepal = [
     { name: "Jhapa" },
@@ -83,7 +85,7 @@ export const districtsOfNepal = [
 ];
 
 function SearchBloodBox() {
-
+    let dispatch = useDispatch<any>()
     async function handleSearch(e: React.FormEvent<HTMLFormElement>) {
 
         e.preventDefault()
@@ -92,7 +94,9 @@ function SearchBloodBox() {
             bloodType: formData.get('bloodType'),
             district: formData.get('district')
         }
-        console.log(data)
+
+        dispatch(searchBlood(data))
+
     }
 
     return (

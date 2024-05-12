@@ -2,13 +2,8 @@ import React from 'react'
 import style from './DashboardPage.module.css'
 import QuickItems from '../../components/LoggedInComponents/DashboardComponents/QuickItems'
 import RecentBloodRequest from '../../components/LoggedInComponents/DashboardComponents/RecentBloodRequest'
-import { useDispatch } from 'react-redux'
-import { getBloodRequest } from '../../features/mainSlice'
+
 function DashboardPage() {
-
-
-
-
 
     return (
         <React.Fragment>
