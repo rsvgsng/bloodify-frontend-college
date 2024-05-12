@@ -28,6 +28,22 @@ export const searchBlood = createAsyncThunk("get/searchBlood", async (data: any)
     return res;
 });
 
+export const searchAmbulance = createAsyncThunk("get/searchAmbulance", async (data: any) => {
+    const response = await fetch(`${API_ROUTE}/main/SearchAmbulance`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
+        body: JSON.stringify(data)
+    });
+    const res = await response.json();
+    return res;
+});
+
+
+
+
 export const mainSlice = createSlice({
     name: "main",
     initialState: {
@@ -37,6 +53,10 @@ export const mainSlice = createSlice({
 
         searchBloodData: [],
         searchBloodDataLoading: false,
+
+
+        searchAmbulanceData: [],
+        searchAmbulanceDataLoading: false,
 
     },
     reducers: {
@@ -67,9 +87,19 @@ export const mainSlice = createSlice({
             })
 
 
+            .addCase(searchAmbulance.pending, (state) => {
+                state.searchAmbulanceDataLoading = true;
+            })
+            .addCase(searchAmbulance.fulfilled, (state, action) => {
+                state.searchAmbulanceData = action.payload;
+                state.searchAmbulanceDataLoading = false;
+            })
+            .addCase(searchAmbulance.rejected, (state) => {
+                state.searchAmbulanceDataLoading = false;
+            })
+
+
     },
 });
 
-export const {
-
-} = mainSlice.actions;
+export const { } = mainSlice.actions;

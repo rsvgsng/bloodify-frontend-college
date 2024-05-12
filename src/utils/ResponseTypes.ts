@@ -23,3 +23,18 @@ export interface Sr {
     district: string
     fullAddress: string
 }
+
+
+export interface SearchAmbulanceType {
+    data: sat[]
+    statusCode: number
+    message: string
+}
+
+export interface sat {
+    ambulanceId: number
+    ambulanceProvider: string
+    ambulanceLocation: string
+    ambulanceContact: string
+    ambulanceDistrict: string
+}
