@@ -14,9 +14,18 @@ import BloodbankPage from './pages/LoggedInPages/BloodbankPage'
 import SingleNewsPage from './pages/LoggedInPages/SingleNewsPage'
 import RequestBloodPage from './pages/LoggedInPages/RequestBloodPage'
 import { Toaster } from 'react-hot-toast'
+import { useDispatch } from 'react-redux'
+import { getBloodRequest } from './features/mainSlice'
 export let isLoggedin = localStorage.getItem('token') ? true : false
 
 function App() {
+  const dispatch = useDispatch<any>()
+
+  if (isLoggedin) {
+    dispatch(getBloodRequest())
+
+  }
+
   if (isLoggedin) return (
     <React.Fragment>
       <Toaster />

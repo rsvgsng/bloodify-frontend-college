@@ -3,10 +3,10 @@ import style from './SignupPage.module.css'
 import signupimg from '../Assets/signup.png'
 import { API_ROUTE } from '../utils/Constants'
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { getBloodRequest } from '../features/mainSlice';
 
 function LoginPage() {
-
-
   async function handleform(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = e.currentTarget
@@ -28,7 +28,8 @@ function LoginPage() {
     let res = await p.json()
     if (res.statusCode == 200) {
       localStorage.setItem('token', res.data)
-      window.location.reload()
+      window.location.href = '/'
+
     } else {
       console.log(res)
       toast.error(res.message, {
