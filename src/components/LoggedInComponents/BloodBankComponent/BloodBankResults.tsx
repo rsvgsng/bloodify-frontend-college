@@ -26,6 +26,7 @@ function BloodBankResults() {
                                     <div className={style.doner__details}>
                                         <div className={style.doner__name}>John Doe</div>
                                         <div className={style.doner__address}>Birtamode-4 , Jhapa</div>
+                                        <div className={style.doner__address}>987865578</div>
                                     </div>
                                 </div>
                             )

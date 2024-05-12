@@ -9,8 +9,10 @@ import DashboardPage from './pages/LoggedInPages/DashboardPage'
 import AmbulancesPage from './pages/LoggedInPages/AmbulancesPage'
 import NewsPage from './pages/LoggedInPages/NewsPage'
 import EventsPage from './pages/LoggedInPages/EventsPage'
-import RequestBloodPage from './pages/LoggedInPages/SearchBloodPage'
+import SearchBloodPage from './pages/LoggedInPages/SearchBloodPage'
 import BloodbankPage from './pages/LoggedInPages/BloodbankPage'
+import SingleNewsPage from './pages/LoggedInPages/SingleNewsPage'
+import RequestBloodPage from './pages/LoggedInPages/RequestBloodPage'
 
 export let isLoggedin = localStorage.getItem('token') ? true : false
 
@@ -21,10 +23,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />} >
           <Route path="/" element={<DashboardPage />} />
-          <Route path="/SearchBlood" element={<RequestBloodPage />} />
+          <Route path="/SearchBlood" element={<SearchBloodPage />} />
           <Route path="/Ambulances" element={<AmbulancesPage />} />
           <Route path="/News" element={<NewsPage />} />
-          <Route path="/BloodRequests" element={<NewsPage />} />
+          <Route path="/News/:id" element={<SingleNewsPage />} />
+
+          <Route path="/BloodRequest" element={<RequestBloodPage />} />
+
           <Route path="/BloodBank" element={<BloodbankPage />} />
           <Route path="/Events" element={<EventsPage />} />
           <Route path="*" element={<Navigate to={'/'} />} />

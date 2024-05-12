@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './SignupPage.module.css'
 import signupimg from '../Assets/signup.png'
+import { districtsOfNepal } from '../components/LoggedInComponents/SearchBloodComponents/SearchBloodBox'
 function SignupPage() {
     function handleform(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -36,8 +37,22 @@ function SignupPage() {
                         <label htmlFor="phonenumber">Your phone number:</label>
                         <input required name='phonenumber' type="number" placeholder="Enter your phone" />
 
+
+                        <label htmlFor="">Your District:</label>
+                        <select name="district" id="">
+                            {
+                                districtsOfNepal.map((district) => {
+                                    return (
+                                        <option value={district.name}>{district.name}</option>
+                                    )
+                                })
+                            }
+                        </select>
+
                         <label htmlFor="address">Your full address:</label>
                         <input required name='address' type="text" placeholder="Enter your Address" />
+
+
 
                         <label htmlFor="bloodtype">Your blood type:</label>
 

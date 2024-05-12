@@ -1,0 +1,65 @@
+.blood__request__container {
+    width: 75%;
+    margin: 0 auto;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+.header__ttl h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+
+    font-family: "Playfair Display", serif;
+    margin-bottom: 25px
+}
+
+.main__request__form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.main__request__form form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.main__request__form form label {
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 10px;
+
+}
+
+.main__request__form form select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.main__request__form form textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.main__request__form form button {
+    padding: 10px;
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}

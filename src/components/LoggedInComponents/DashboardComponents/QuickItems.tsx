@@ -4,6 +4,7 @@ import { MdBloodtype } from "react-icons/md";
 import { FaAmbulance } from "react-icons/fa";
 import { FaNewspaper } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
+import { BiSolidDonateBlood } from "react-icons/bi";
 
 import { MdEventAvailable } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
@@ -15,15 +16,15 @@ let ql = [
     },
     {
         name: "Blood Bank",
-        icon: <MdBloodtype />,
+        icon: <BiSolidDonateBlood />,
         link: "/BloodBank"
 
     },
 
     {
-        name: "Blood Requests",
+        name: "Request Blood",
         icon: <MdBloodtype />,
-        link: "/BloodRequests"
+        link: "/BloodRequest"
     },
     {
         name: "Ambulance List",
