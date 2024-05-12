@@ -38,3 +38,18 @@ export interface sat {
     ambulanceContact: string
     ambulanceDistrict: string
 }
+
+
+export interface SearchBloodBankType {
+    data: sbbt[]
+    statusCode: number
+    message: string
+}
+
+export interface sbbt {
+    bankID: number
+    bankName: string
+    bankLoaction: string
+    bankContact: string
+    bankDistrict: string
+}

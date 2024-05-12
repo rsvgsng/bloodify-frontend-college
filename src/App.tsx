@@ -15,15 +15,16 @@ import SingleNewsPage from './pages/LoggedInPages/SingleNewsPage'
 import RequestBloodPage from './pages/LoggedInPages/RequestBloodPage'
 import { Toaster } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
-import { getBloodRequest } from './features/mainSlice'
+import { getBloodRequest, setUsername } from './features/mainSlice'
 export let isLoggedin = localStorage.getItem('token') ? true : false
+import { jwtDecode } from "jwt-decode";
 
 function App() {
   const dispatch = useDispatch<any>()
 
   if (isLoggedin) {
     dispatch(getBloodRequest())
-
+    dispatch(setUsername(jwtDecode(localStorage.getItem('token')).userName))
   }
 
   if (isLoggedin) return (

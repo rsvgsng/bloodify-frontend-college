@@ -6,9 +6,11 @@ import { isLoggedin } from '../App'
 import { MdDashboard, MdNewspaper, MdEvent, MdBloodtype } from "react-icons/md";
 import { FaAmbulance } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
-
+import { useSelector } from 'react-redux'
+import { RootState } from '../features/store'
 function Navbar() {
     const navigate = useNavigate()
+
     return (
         <React.Fragment>
             <div className={styles.nav__container}>
@@ -78,6 +80,8 @@ function LoggedOutNav() {
 }
 
 function LoggedInNav() {
+    const userName = useSelector((state: RootState) => state.main.userName)
+
     const navigate = useNavigate()
     const location = useLocation()
     return (
@@ -114,12 +118,14 @@ function LoggedInNav() {
                 <li
                     className={styles.user__name__s}
                     onClick={() => {
+                        let s = confirm('Are you sure you want to logout?')
+                        if (!s) return
                         localStorage.removeItem('token')
                         window.location.reload()
                     }}
                 ><FaUserCircle />
                     <p>
-                        rsvgsngrsv
+                        {userName}
                     </p>
                 </li>
             </ul>

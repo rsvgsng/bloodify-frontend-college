@@ -2,16 +2,18 @@ import React from 'react'
 import style from '../SearchBloodComponents/SearchBloodBox.module.css'
 import { districtsOfNepal } from '../SearchBloodComponents/SearchBloodBox'
 import { FaSearch } from 'react-icons/fa'
+import { useDispatch } from 'react-redux'
+import { searchBloodBanks } from '../../../features/mainSlice'
 function BloodBankSearch() {
+    let dispatch = useDispatch<any>()
     async function handleSearch(e: React.FormEvent<HTMLFormElement>) {
 
         e.preventDefault()
         let formData = new FormData(e.currentTarget.form)
         let data = {
-            bloodType: formData.get('bloodType'),
             district: formData.get('district')
         }
-        console.log(data)
+        dispatch(searchBloodBanks(data))
     }
 
     return (

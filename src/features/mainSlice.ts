@@ -41,6 +41,18 @@ export const searchAmbulance = createAsyncThunk("get/searchAmbulance", async (da
     return res;
 });
 
+export const searchBloodBanks = createAsyncThunk("get/searchBloodBanks", async (data: any) => {
+    const response = await fetch(`${API_ROUTE}/main/searchBloodBank`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
+        body: JSON.stringify(data)
+    });
+    const res = await response.json();
+    return res;
+});
 
 
 
@@ -58,9 +70,25 @@ export const mainSlice = createSlice({
         searchAmbulanceData: [],
         searchAmbulanceDataLoading: false,
 
+        searchBloodBankData: [],
+        searchBloodBankDataLoading: false,
+
+        drawerOpen: false,
+        drawerData: {},
+
+        userName: "",
+
     },
     reducers: {
-
+        setDrawerOpen: (state, action) => {
+            state.drawerOpen = action.payload;
+        },
+        setDrawerData: (state, action) => {
+            state.drawerData = action.payload;
+        },
+        setUsername: (state, action) => {
+            state.userName = action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -98,8 +126,23 @@ export const mainSlice = createSlice({
                 state.searchAmbulanceDataLoading = false;
             })
 
+            .addCase(searchBloodBanks.pending, (state) => {
+                state.searchBloodBankDataLoading = true;
+            })
+            .addCase(searchBloodBanks.fulfilled, (state, action) => {
+                state.searchBloodBankData = action.payload;
+                state.searchBloodBankDataLoading = false;
+            })
+            .addCase(searchBloodBanks.rejected, (state) => {
+                state.searchBloodBankDataLoading = false;
+            })
+
 
     },
 });
 
-export const { } = mainSlice.actions;
+export const {
+    setDrawerOpen,
+    setDrawerData,
+    setUsername
+} = mainSlice.actions;

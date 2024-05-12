@@ -33,7 +33,7 @@ function AmbulanceResult() {
                                         </div>
                                         <div className={style.doner__details}>
                                             <div className={style.doner__name}>
-                                                {e.ambulanceProvider}
+                                                {e.ambulanceProvider} ({e.ambulanceDistrict})
                                             </div>
                                             <div className={style.doner__address}>
                                                 {e.ambulanceLocation}

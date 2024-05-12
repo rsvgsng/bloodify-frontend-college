@@ -1,13 +1,13 @@
 import React from 'react'
 import style from './RecentBloodRequest.module.css'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../features/store'
 import { RequestBloodType } from '../../../utils/ResponseTypes'
+import { setDrawerData, setDrawerOpen } from '../../../features/mainSlice'
 function RecentBloodRequest() {
     const bloodRequest: any = useSelector((state: RootState) => state.main.bloodRequestData)
     let data: RequestBloodType[] = bloodRequest.data
-
-    console.log(data)
+    const dispatch = useDispatch()
     return (
         <React.Fragment>
             <div className={style.side__bar}>
@@ -24,7 +24,12 @@ function RecentBloodRequest() {
                     {
                         data?.map((_, i) => {
                             return (
-                                <div className={style.req__item__blood}>
+                                <div className={style.req__item__blood}
+                                    onClick={() => {
+                                        dispatch(setDrawerOpen(true)),
+                                            dispatch(setDrawerData(_))
+                                    }}
+                                >
                                     <div className={style.blood__type}>
                                         <h3>{_.bloodGroup}</h3>
                                     </div>

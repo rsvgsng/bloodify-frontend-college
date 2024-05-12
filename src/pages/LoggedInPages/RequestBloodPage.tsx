@@ -101,7 +101,9 @@ function RequestBloodPage() {
                         <input type="text" name="contactNumber" id="contactNumber" placeholder="Contact Number" required />
 
                         <label htmlFor="requestedDate">Requested date</label>
-                        <input type="date" name="requestedDate" id="date" required />
+                        <input
+                            min={new Date().toISOString().split('T')[0]}
+                            type="date" name="requestedDate" id="date" required />
 
                         <label htmlFor="details">Details</label>
                         <textarea name="details" id="details"
