@@ -45,8 +45,6 @@ function RequestBloodPage() {
             })
             dispatch(getBloodRequest())
             navigate('/')
-
-
         } else {
             toast.error(res.message, {
                 duration: 4000,
@@ -54,6 +52,7 @@ function RequestBloodPage() {
             })
         }
     }
+
 
     return (
         <React.Fragment>

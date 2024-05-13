@@ -4,7 +4,9 @@ import signupimg from '../Assets/signup.png'
 import { districtsOfNepal } from '../components/LoggedInComponents/SearchBloodComponents/SearchBloodBox'
 import toast from 'react-hot-toast'
 import { API_ROUTE } from '../utils/Constants'
+import { useNavigate } from 'react-router-dom'
 function SignupPage() {
+    const navigate = useNavigate()
     async function handleform(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         const form = e.currentTarget
@@ -29,8 +31,13 @@ function SignupPage() {
         })
         let res = await a.json()
         if (res.statusCode == 200) {
-            localStorage.setItem('token', res.data)
-            window.location.reload()
+
+            toast.success(res.data, {
+                duration: 4000,
+                position: 'top-center',
+            })
+            return navigate('/Login')
+
         } else {
             toast.error(res.message, {
                 duration: 4000,

@@ -10,6 +10,7 @@ import { FaMapMarkedAlt } from "react-icons/fa";
 import { MdBloodtype } from "react-icons/md";
 import { FaPhoneSquare } from "react-icons/fa";
 import { BsCalendar2DateFill } from "react-icons/bs";
+import { IoText } from "react-icons/io5";
 
 interface IDrawerData {
     patientName: string
@@ -101,6 +102,18 @@ function SideDrawer() {
                         </div>
                     </div>
 
+
+                    <div className={style.drawer__content}>
+                        <div className={style.item__det}>
+                            <IoText />
+                            <div className={style.rs_s}>
+                                <h3>Description</h3>
+                                <p>{
+                                    data.details
+                                }</p>
+                            </div>
+                        </div>
+                    </div>
 
                 </Drawer>
             </div>

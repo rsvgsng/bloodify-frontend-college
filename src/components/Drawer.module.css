@@ -1,7 +1,5 @@
 .drawer {
     padding: 20px;
-    background-color: #400513 !important;
-    color: white;
 }
 
 .drawer__content {
@@ -38,14 +36,12 @@
 
 .rs_s p {
     font-size: 18px;
-    color: #efefef;
     margin-bottom: 5px;
     font-family: 'Roboto', sans-serif;
 }
 
 .rs_s h3 {
     font-size: 16px;
-    color: #efefef;
     margin-bottom: 10px;
     font-weight: 600;
 }
