@@ -1,0 +1,54 @@
+.loading__init svg {
+    font-size: 80px;
+    margin-top: 20px;
+    animation: rotate 0.7s linear infinite;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+.loading__text {
+    animation: fadeinout 1.1s linear infinite;
+    margin-top: 10px;
+}
+
+@keyframes fadeinout {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+.loading__init {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.auth__msg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.auth__msg h1 {
+    margin-bottom: 20px;
+}
+
+.loading__init {}

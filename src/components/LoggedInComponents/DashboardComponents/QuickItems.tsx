@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './QuickItems.module.css'
-import { MdBloodtype } from "react-icons/md";
+import { MdBloodtype, MdCampaign } from "react-icons/md";
 import { FaAmbulance } from "react-icons/fa";
 import { FaNewspaper } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
@@ -38,9 +38,15 @@ let ql = [
     },
 
     {
-        name: "Events",
+        name: "Upcoming Campaigns",
         icon: <MdEventAvailable />,
         link: '/Events'
+    }
+    ,
+    {
+        name: "Past Campaigns",
+        icon: <MdCampaign />,
+        link: '/Campaigns'
     }
 ]
 

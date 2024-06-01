@@ -15,6 +15,20 @@ export const getBloodRequest = createAsyncThunk("get/getBloodRequest", async () 
     return data;
 });
 
+
+export const getPing = createAsyncThunk("get/getPing", async () => {
+    const response = await fetch(`${API_ROUTE}/auth/ping`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    });
+    const data = await response.json();
+    return data;
+})
+
+
 export const searchBlood = createAsyncThunk("get/searchBlood", async (data: any) => {
     const response = await fetch(`${API_ROUTE}/main/searchBlood`, {
         method: 'PUT',
@@ -72,6 +86,9 @@ export const mainSlice = createSlice({
 
         searchBloodBankData: [],
         searchBloodBankDataLoading: false,
+
+        pingData: {},
+        pingDataLoading: false,
 
         drawerOpen: false,
         drawerData: {},
@@ -137,6 +154,14 @@ export const mainSlice = createSlice({
                 state.searchBloodBankDataLoading = false;
             })
 
+
+            .addCase(getPing.pending, (state) => {
+                state.pingDataLoading = true;
+            })
+            .addCase(getPing.fulfilled, (state, action) => {
+                state.pingData = action.payload;
+                state.pingDataLoading = false;
+            })
 
     },
 });
