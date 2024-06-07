@@ -1,16 +1,89 @@
 import React from 'react'
 import { districtsOfNepal } from '../components/LoggedInComponents/SearchBloodComponents/SearchBloodBox'
 import style from './AdminUsers.module.css'
-import { SiMicrosoftexcel } from 'react-icons/si'
 import { IoIosAddCircle } from 'react-icons/io'
+import Modal from 'react-responsive-modal';
 
 function AdminCampagins() {
 
     const [campaign, setCampaign] = React.useState<'upcoming' | 'past'>('upcoming')
+    const [pastModel, setPastModel] = React.useState<boolean>(false)
+    const [upcomingModel, setUpcomingModel] = React.useState<boolean>(false)
+
+
+
+
+
+
+
 
 
     if (campaign === 'upcoming') return (
         <React.Fragment>
+
+            {/* Upcoming Model Box */}
+
+            <Modal
+                styles={{
+                    closeButton: { cursor: "pointer" },
+                    modal: { borderRadius: "10px", width: '700px    ' }
+
+                }}
+                closeOnOverlayClick={false}
+                open={upcomingModel}
+                onClose={
+                    () => setUpcomingModel(false)
+                } center>
+
+                <div className={style.add__ttl}>
+                    <h3>Add a upcoming campaign</h3>
+                    <form action="#" onSubmit={(e) => null} className={style.add__bankform}>
+                        <label htmlFor="campaignId">Campaign ID</label>
+                        <input
+                            name="campaignId"
+                            type="number"
+                            placeholder="Campaign ID"
+                        />
+
+                        <label htmlFor="campaignName">Campaign Name</label>
+                        <input
+                            name="campaignName"
+                            type="text"
+                            placeholder="Campaign Name"
+                        />
+                        <label htmlFor="organizer">Organizer</label>
+                        <input
+                            name="organizer"
+                            type="text"
+                            placeholder="Organizer" />
+
+                        <label htmlFor="startDate">Start Date</label>
+                        <input
+                            name="startDate"
+                            type="date" />
+
+                        <label htmlFor="endDate">End Date</label>
+                        <input
+                            name="endDate"
+                            type="date" />
+
+
+                        <label htmlFor="description">Description</label>
+                        <textarea
+
+                            name="description"
+                            placeholder="Description"
+                            rows={10}
+                        ></textarea>
+                        <button type="submit" value="Add Bank" >
+                            Add Campaign
+                        </button>
+                    </form>
+                </div>
+
+            </Modal>
+
+
             <div className={style.users__section}>
 
                 <div className={style.campaign__selector}>
@@ -31,21 +104,13 @@ function AdminCampagins() {
                     <div className={style.right__bar}>
 
 
-                        <div className={style.dload__logo}>
+                        <div className={style.dload__logo}
+
+                            onClick={() => setUpcomingModel(true)}
+                        >
                             <IoIosAddCircle /> Add Upcoming Campagins
                         </div>
-                        <div className={style.dload__logo}>
-                            <select>
-                                <option>Select District</option>
-                                {
-                                    districtsOfNepal.map((item, index) => {
-                                        return (
-                                            <option key={index}>{item.name}</option>
-                                        )
-                                    })
-                                }
-                            </select>
-                        </div>
+
                     </div>
 
                 </div>
@@ -57,10 +122,8 @@ function AdminCampagins() {
                             <th>ID</th>
                             <th>Campagin Name</th>
                             <th>Duration</th>
-                            <th>No. of Doners</th>
                             <th>Organizer</th>
                             <th>Description</th>
-                            <th>Action</th>
 
                         </tr>
 
@@ -72,13 +135,8 @@ function AdminCampagins() {
                                         <td>{item}</td>
                                         <td>user{item}</td>
                                         <td>user{item} fullname</td>
-                                        <td>user{item} contact</td>
                                         <td>user{item} district</td>
                                         <td>user{item} bloodtype</td>
-
-                                        <td style={{ display: 'flex' }}>
-                                            <button style={{ width: '100%' }}>Download</button>
-                                        </td>
 
                                     </tr>
                                 )
@@ -117,18 +175,7 @@ function AdminCampagins() {
                         <div className={style.dload__logo}>
                             <IoIosAddCircle /> Add Past Campagins
                         </div>
-                        <div className={style.dload__logo}>
-                            <select>
-                                <option>Select District</option>
-                                {
-                                    districtsOfNepal.map((item, index) => {
-                                        return (
-                                            <option key={index}>{item.name}</option>
-                                        )
-                                    })
-                                }
-                            </select>
-                        </div>
+
                     </div>
 
                 </div>

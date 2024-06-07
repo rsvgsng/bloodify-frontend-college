@@ -4,9 +4,15 @@ import { SiMicrosoftexcel } from 'react-icons/si'
 import { useSelector } from 'react-redux'
 import { RootState } from '../features/store'
 import { IBloodRequestMain } from './Admin.Interface'
+import * as XLSX from 'xlsx'
 function AdminBloodRequest() {
     const bloodRequests = useSelector((state: RootState) => state?.main?.bloodRequestsData)
     let data: IBloodRequestMain = bloodRequests
+
+
+
+
+    const [bloodType, setBloodType] = React.useState<string>('All')
 
     return (
         <React.Fragment>
@@ -17,8 +23,11 @@ function AdminBloodRequest() {
                     <div className={style.right__bar}>
 
                         <div className={style.dload__logo}>
-                            <select>
-                                <option>Blood Type</option>
+                            <select
+                                onChange={(e) => setBloodType(e.target.value)}
+                                value={bloodType}
+                            >
+                                <option>All</option>
                                 <option>A+</option>
                                 <option>A-</option>
                                 <option>B+</option>
@@ -50,22 +59,30 @@ function AdminBloodRequest() {
 
                         {
 
-                            data?.data?.map((item, index) => {
-                                return (
-                                    <tr key={index}>
-                                        <td>{item.reqID}</td>
-                                        <td>{item.userName}</td>
-                                        <td>{item.patientName}</td>
-                                        <td>{item.Hospital}</td>
-                                        <td>{item.bloodGroup}</td>
-                                        <td>{item.District}</td>
-                                        <td>
-                                            {item.requestedDate}
-                                        </td>
-                                        <td>{item.details}</td>
-                                    </tr>
-                                )
-                            })
+                            data?.data ?
+                                data?.data.filter((item) => {
+                                    if (bloodType === 'All') {
+                                        return item
+                                    } else {
+                                        return item.bloodGroup === bloodType
+                                    }
+                                }).map((item, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{item.reqID}</td>
+                                            <td>{item.userName}</td>
+                                            <td>{item.patientName}</td>
+                                            <td>{item.Hospital}</td>
+                                            <td>{item.bloodGroup}</td>
+                                            <td>{item.District}</td>
+                                            <td>
+                                                {item.requestedDate}
+                                            </td>
+                                            <td>{item.details}</td>
+                                        </tr>
+                                    )
+                                }) : null
+
                         }
                     </table>
                 </div>

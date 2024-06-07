@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import style from './AdminUsers.module.css';
 import { SiMicrosoftexcel } from 'react-icons/si';
 import { districtsOfNepal } from '../components/LoggedInComponents/SearchBloodComponents/SearchBloodBox';
 import { IoIosAddCircle } from 'react-icons/io';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../features/store';
 import { IBloodBankMain } from './Admin.Interface';
 import * as XLSX from 'xlsx';
 import Modal from 'react-responsive-modal';
+import { API_ROUTE } from '../utils/Constants';
+import { getAdminDash, getAllBloodBanks } from '../features/mainSlice';
 
 function AdminBloodBank() {
+    const dispatch = useDispatch<any>();
 
     const bloodBanks = useSelector((state: RootState) => state?.main?.bloodBankData);
     let data: IBloodBankMain = bloodBanks;
@@ -26,21 +29,48 @@ function AdminBloodBank() {
 
     const [uploadModel, setUploadModel] = React.useState(false)
 
+
+    interface Data {
+        [key: string]: any; // Adjust according to the structure of your data
+    }
+
+    const [excelData, setExcelData] = React.useState<Data[]>([]);
+
     const exportToExcel = () => {
         let a = confirm(`Do you want to download ${data?.data?.length} bloodbank data in excel format ?`)
         if (!a) return
-        // Convert the data to a worksheet
         const worksheet = XLSX.utils.json_to_sheet(data?.data || []);
-        // Create a new workbook
         const workbook = XLSX.utils.book_new();
-        // Append the worksheet to the workbook
         XLSX.utils.book_append_sheet(workbook, worksheet, 'Users');
-        // Write the workbook to a file
         XLSX.writeFile(workbook, 'bloodbank_data.xlsx');
     };
 
-    console.log(file)
-    function handleAddBank(e: React.FormEvent<HTMLFormElement>) {
+
+    // Parse the excel file
+    const handleFileUpload = (event: ChangeEvent<HTMLInputElement>): void => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+
+        reader.onload = (e: ProgressEvent<FileReader>): void => {
+            const binaryStr = e.target?.result as string;
+            const workbook = XLSX.read(binaryStr, { type: 'binary' });
+
+            // Assuming the data is in the first sheet
+            const sheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[sheetName];
+
+            // Convert the sheet to JSON
+            const jsonData: Data[] = XLSX.utils.sheet_to_json(worksheet);
+            setExcelData(jsonData);
+        };
+
+        reader.readAsBinaryString(file);
+    };
+
+
+    async function handleAddBank(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const form = e.currentTarget as HTMLFormElement;
         const formData = new FormData(form);
@@ -53,13 +83,63 @@ function AdminBloodBank() {
             return;
         }
         const data = {
-            bankName,
-            bankLoaction: bankLocation,
-            bankContact,
-            bankDistrict
+            BankName: bankName,
+            Location: bankLocation,
+            Contact: bankContact,
+            District: bankDistrict
         }
-        console.log(data);
+
+        let p = await fetch(API_ROUTE + '/admin/AddBloodBank?mode=single', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify(data)
+        })
+
+        let res = await p.json()
+        if (res.statusCode === 200) {
+            dispatch(getAdminDash())
+            dispatch(getAllBloodBanks())
+            setAddBankModel(false)
+            alert("Bank Added Successfully")
+        } else {
+            alert(res.data)
+        }
+
     }
+
+
+    async function handleExcelUpload() {
+        if (excelData.length === 0) {
+            alert("Please upload the excel file first")
+            return
+        }
+        let a = confirm(`Do you want to upload ${excelData.length} bloodbank data ?`)
+        if (!a) return
+
+        let p = await fetch(API_ROUTE + '/admin/AddBloodBank?mode=bulk', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify(excelData)
+        })
+        let res = await p.json()
+        if (res.statusCode === 200) {
+            dispatch(getAdminDash())
+            dispatch(getAllBloodBanks())
+            setUploadModel(false)
+            alert("Bank Added Successfully")
+        } else {
+            alert(res.message)
+        }
+
+
+    }
+
     return (
         <React.Fragment>
 
@@ -161,10 +241,12 @@ function AdminBloodBank() {
                         <br />
                         <input
                             type="file"
-                            onChange={(e) => setFile(e.target.files?.[0])}
+                            onChange={(e) =>
+                                handleFileUpload(e)
+                            }
                         />
 
-                        <button>
+                        <button onClick={handleExcelUpload}>
                             Upload
                         </button>
 
