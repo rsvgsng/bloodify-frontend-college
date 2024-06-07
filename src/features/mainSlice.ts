@@ -123,6 +123,36 @@ export const getAllBloodBanks = createAsyncThunk("get/getAllBloodBanks", async (
     return res;
 })
 
+
+export const getCampaginsAdmin = createAsyncThunk("get/getCampaginsAdmin", async (data: any) => {
+    const response = await fetch(`${API_ROUTE}/admin/GetAllCampaigns`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
+        body: JSON.stringify(data)
+    });
+    const res = await response.json();
+    return res;
+})
+
+export const getAmbulancesAdmin = createAsyncThunk("get/getAmbulancesAdmin", async (data: any) => {
+    const response = await fetch(`${API_ROUTE}/admin/getambulances`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
+        body: JSON.stringify(data)
+    });
+    const res = await response.json();
+    return res;
+})
+
+
+
+
 export const mainSlice = createSlice({
     name: "main",
     initialState: {
@@ -159,6 +189,13 @@ export const mainSlice = createSlice({
 
         bloodBankData: [],
         bloodBankDataLoading: false,
+
+        campaignsAdminData: [],
+        campaignsAdminDataLoading: false,
+
+        AdminAmbulanceData: [],
+        AdminAmbulanceDataLoading: false,
+
 
         userName: "",
 
@@ -269,6 +306,31 @@ export const mainSlice = createSlice({
                 state.bloodBankDataLoading = false;
             })
 
+            .addCase(getAllBloodBanks.rejected, (state) => {
+                state.bloodBankDataLoading = false;
+            })
+
+            .addCase(getCampaginsAdmin.pending, (state) => {
+                state.campaignsAdminDataLoading = true;
+            })
+
+            .addCase(getCampaginsAdmin.fulfilled, (state, action) => {
+                state.campaignsAdminData = action.payload;
+                state.campaignsAdminDataLoading = false;
+            })
+
+            .addCase(getCampaginsAdmin.rejected, (state) => {
+                state.campaignsAdminDataLoading = false;
+            })
+
+            .addCase(getAmbulancesAdmin.pending, (state) => {
+                state.AdminAmbulanceDataLoading = true;
+            })
+
+            .addCase(getAmbulancesAdmin.fulfilled, (state, action) => {
+                state.AdminAmbulanceData = action.payload;
+                state.AdminAmbulanceDataLoading = false;
+            })
 
     },
 });

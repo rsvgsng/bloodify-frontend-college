@@ -10,6 +10,11 @@
     justify-content: space-between;
 }
 
+.right__item {
+    display: flex;
+    flex-direction: column;
+}
+
 .left__item p,
 .right__item p {
     margin: 0;

@@ -245,6 +245,15 @@ function AdminBloodBank() {
                                 handleFileUpload(e)
                             }
                         />
+                        <br />
+                        <p
+                            style={{
+                                fontSize: 12,
+                                color: "grey"
+                            }}
+                        >
+                            A sample excel file can be downloaded from <a href="/BloodBank.xlsx"> here</a>
+                        </p>
 
                         <button onClick={handleExcelUpload}>
                             Upload

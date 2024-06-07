@@ -21,6 +21,20 @@ function Adminlayout() {
                     <p>
                         Server Time:   <Clock initialTime={time.serverTime} />
                     </p>
+                    <a
+                        onClick={(e) => {
+                            e.preventDefault()
+                            let p = confirm('Are you sure you want to logout?')
+                            if (!p) return
+                            localStorage.clear()
+                            window.location.href = '/'
+                        }}
+                        style={{
+                            textAlign: 'right ',
+                            fontSize: '15px',
+                            marginTop: '10px',
+                            color: 'white',
+                        }} href="">Logout ?</a>
                 </div>
             </div>
 
@@ -50,12 +64,12 @@ function Adminlayout() {
                         >
                             Campagins
                         </li>
-                        <li>
+                        <li
+                            onClick={() => navigate('/Ambulances')}
+                        >
                             Ambulances
                         </li>
-                        <li>
-                            News
-                        </li>
+
                     </ul>
                 </div>
 

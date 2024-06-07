@@ -102,3 +102,44 @@ export interface BloodBankSub {
     bankContact: string
     bankDistrict: string
 }
+
+
+
+
+export interface ICampaignsMain {
+    data: SubCampaigns[]
+    statusCode: number
+}
+
+export interface SubCampaigns {
+    campaignID: number
+    campaignName: string
+    campaignStartDate: string
+    campaignEndDate: string
+    campaignOrganizer: string
+    description: string
+    isFinished: number
+    doners?: Doner[]
+}
+
+export interface Doner {
+    donerID: number
+    donerContact: string
+    donerFullName: string
+    donerLocation: string
+}
+
+
+
+export interface IAdminAmbulanceMain {
+    data: Ambu[]
+    statusCode: number
+}
+
+export interface Ambu {
+    ambulanceId: number
+    ambulanceProvider: string
+    ambulanceLocation: string
+    ambulanceContact: string
+    ambulanceDistrict: string
+}

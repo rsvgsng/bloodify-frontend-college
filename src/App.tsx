@@ -12,7 +12,7 @@ import BloodbankPage from './pages/LoggedInPages/BloodbankPage'
 import RequestBloodPage from './pages/LoggedInPages/RequestBloodPage'
 import { Toaster } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
-import { getAdminDash, getAllBloodBanks, getAllBloodRequests, getAllUsersAdmin, getBloodRequest, getPing, setUsername } from './features/mainSlice'
+import { getAdminDash, getAllBloodBanks, getAllBloodRequests, getAllUsersAdmin, getAmbulancesAdmin, getBloodRequest, getCampaginsAdmin, getPing, setUsername } from './features/mainSlice'
 export let isLoggedin = localStorage.getItem('token') ? true : false
 import { jwtDecode } from "jwt-decode";
 import CampaignPage from './pages/LoggedInPages/CampaignPage'
@@ -27,6 +27,7 @@ import AdminBloodRequest from './AdminPages/AdminBloodRequest'
 import AdminBloodBank from './AdminPages/AdminBloodBank'
 import AdminCampagins from './AdminPages/AdminCampagins'
 import CampaignsPage from './pages/LoggedInPages/EventsPage'
+import AdminAmbulance from './AdminPages/AdminAmbulance'
 function App() {
   const dispatch = useDispatch<any>()
   const [view, setView] = React.useState<'admin' | 'user' | 'blank' | 'notlogged'>(isLoggedin ? 'blank' : 'notlogged')
@@ -41,6 +42,8 @@ function App() {
           dispatch(getAllUsersAdmin())
           dispatch(getAllBloodRequests())
           dispatch(getAllBloodBanks())
+          dispatch(getCampaginsAdmin())
+          dispatch(getAmbulancesAdmin())
           return setView('admin')
         }
 
@@ -91,6 +94,7 @@ function App() {
           <Route path="/BloodRequests" element={<AdminBloodRequest />} />
           <Route path="/BloodBanks" element={<AdminBloodBank />} />
           <Route path="/Campagins" element={<AdminCampagins />} />
+          <Route path="/Ambulances" element={<AdminAmbulance />} />
 
           <Route path="*" element={<Navigate to={'/'} />} />
         </Route>
