@@ -8,22 +8,27 @@ import AboutPage from './pages/AboutPage'
 import DashboardPage from './pages/LoggedInPages/DashboardPage'
 import AmbulancesPage from './pages/LoggedInPages/AmbulancesPage'
 import NewsPage from './pages/LoggedInPages/NewsPage'
-import EventsPage from './pages/LoggedInPages/EventsPage'
 import SearchBloodPage from './pages/LoggedInPages/SearchBloodPage'
 import BloodbankPage from './pages/LoggedInPages/BloodbankPage'
 import SingleNewsPage from './pages/LoggedInPages/SingleNewsPage'
 import RequestBloodPage from './pages/LoggedInPages/RequestBloodPage'
 import { Toaster } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
-import { getBloodRequest, getPing, setUsername } from './features/mainSlice'
+import { getAdminDash, getAllBloodBanks, getAllBloodRequests, getAllUsersAdmin, getBloodRequest, getPing, setUsername } from './features/mainSlice'
 export let isLoggedin = localStorage.getItem('token') ? true : false
 import { jwtDecode } from "jwt-decode";
-import Campaign from './components/LoggedInComponents/CampaignComponent/Campaign'
 import CampaignPage from './pages/LoggedInPages/CampaignPage'
-import { PiSpinnerBallThin } from 'react-icons/pi'
+import 'react-responsive-modal/styles.css';
+
 import './App.css'
 import { TbFidgetSpinner } from 'react-icons/tb'
 import Adminlayout from './AdminPages/Adminlayout'
+import Admindash from './AdminPages/Admindash'
+import AdminUsers from './AdminPages/AdminUsers'
+import AdminBloodRequest from './AdminPages/AdminBloodRequest'
+import AdminBloodBank from './AdminPages/AdminBloodBank'
+import AdminCampagins from './AdminPages/AdminCampagins'
+import CampaignsPage from './pages/LoggedInPages/EventsPage'
 function App() {
   const dispatch = useDispatch<any>()
   const [view, setView] = React.useState<'admin' | 'user' | 'blank' | 'notlogged'>(isLoggedin ? 'blank' : 'notlogged')
@@ -32,7 +37,12 @@ function App() {
     if (isLoggedin) {
       dispatch(getPing()).then((res: any) => {
         let role = res.payload.role
+        console.log(role)
         if (role === 'admin') {
+          dispatch(getAdminDash())
+          dispatch(getAllUsersAdmin())
+          dispatch(getAllBloodRequests())
+          dispatch(getAllBloodBanks())
           return setView('admin')
         }
 
@@ -65,7 +75,7 @@ function App() {
           </h1>
           <TbFidgetSpinner />
           <p className='loading__text'>
-            Wrapping up the last few things...
+            Authorizing your account and loading your dashboard.....
           </p>
 
         </div>
@@ -78,6 +88,13 @@ function App() {
       <Toaster />
       <Routes>
         <Route path='/' element={<Adminlayout />} >
+          <Route path="/" element={<Admindash />} />
+          <Route path="/Users" element={<AdminUsers />} />
+          <Route path="/BloodRequests" element={<AdminBloodRequest />} />
+          <Route path="/BloodBanks" element={<AdminBloodBank />} />
+          <Route path="/Campagins" element={<AdminCampagins />} />
+
+          <Route path="*" element={<Navigate to={'/'} />} />
         </Route>
       </Routes>
     </React.Fragment>
@@ -95,8 +112,10 @@ function App() {
           <Route path="/News/:id" element={<SingleNewsPage />} />
           <Route path="/BloodRequest" element={<RequestBloodPage />} />
           <Route path="/BloodBank" element={<BloodbankPage />} />
-          <Route path="/Campaigns" element={<CampaignPage />} />
-          <Route path="/Events" element={<EventsPage />} />
+          <Route path="/Campaigns" element={<CampaignsPage />} />
+          <Route path="/CampaignsPast" element={<CampaignPage />} />
+
+
           <Route path="*" element={<Navigate to={'/'} />} />
         </Route>
       </Routes>

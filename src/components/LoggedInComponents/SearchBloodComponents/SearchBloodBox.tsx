@@ -7,7 +7,6 @@ import { searchBlood } from '../../../features/mainSlice';
 
 export const districtsOfNepal = [
     { name: "Jhapa" },
-
     { name: "Achham" },
     { name: "Arghakhanchi" },
     { name: "Baglung" },

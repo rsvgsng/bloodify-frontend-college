@@ -40,13 +40,13 @@ let ql = [
     {
         name: "Upcoming Campaigns",
         icon: <MdEventAvailable />,
-        link: '/Events'
+        link: '/Campaigns'
     }
     ,
     {
         name: "Past Campaigns",
         icon: <MdCampaign />,
-        link: '/Campaigns'
+        link: '/CampaignsPast'
     }
 ]
 

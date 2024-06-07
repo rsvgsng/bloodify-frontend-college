@@ -3,12 +3,12 @@ import style from './EventsPage.module.css'
 import { MdDateRange } from 'react-icons/md'
 import { GrOrganization } from "react-icons/gr";
 
-function EventsPage() {
+function CampaignsPage() {
     return (
         <React.Fragment>
             <div className={style.event__container}>
                 <div className={style.header__ttl}>
-                    <h2>Upcoming Events </h2>
+                    <h2>Upcoming Campaigns </h2>
                 </div>
                 <div className={style.event__body}>
                     {
@@ -50,4 +50,4 @@ function EventsPage() {
     )
 }
 
-export default EventsPage
+export default CampaignsPage

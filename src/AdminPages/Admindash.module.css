@@ -1,0 +1,70 @@
+.card__stat {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    margin-top: 20px;
+
+}
+
+.dash__container {}
+
+.recent__donation__req {
+    font-family: 'Roboto', sans-serif;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.recent__donation__req h3 {
+    margin-bottom: 20px;
+
+}
+
+.header__tb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.header__tb span {
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+
+}
+
+.recent__donation__req table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.recent__donation__req th {
+    padding: 10px;
+    border: 1px solid;
+    text-align: left;
+}
+
+.recent__donation__req td {
+    padding: 10px;
+    border: 1px solid;
+    text-align: left;
+}
+
+.recent__donation__req tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.recent__donation__req tr:hover {
+    background-color: #f2f2f2;
+}
+
+.recent__donation__req th {
+    background-color: #354064;
+    color: white;
+}
+
+.recent__donation__req th,
+.recent__donation__req td {
+    border: 1px solid black;
+    padding: 8px;
+}

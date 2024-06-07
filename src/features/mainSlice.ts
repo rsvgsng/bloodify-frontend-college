@@ -70,6 +70,59 @@ export const searchBloodBanks = createAsyncThunk("get/searchBloodBanks", async (
 
 
 
+export const getAdminDash = createAsyncThunk("get/getAdminDash", async (data: any) => {
+    const response = await fetch(`${API_ROUTE}/admin/dashboard`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
+        body: JSON.stringify(data)
+    });
+    const res = await response.json();
+    return res;
+});
+
+export const getAllBloodRequests = createAsyncThunk("get/getAllBloodRequests", async (data: any) => {
+    const response = await fetch(`${API_ROUTE}/admin/GetAllRequests`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
+        body: JSON.stringify(data)
+    });
+    const res = await response.json();
+    return res;
+});
+
+export const getAllUsersAdmin = createAsyncThunk("get/getAllUsersAdmin", async (data: any) => {
+    const response = await fetch(`${API_ROUTE}/admin/GetAllUsers`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
+        body: JSON.stringify(data)
+    });
+    const res = await response.json();
+    return res;
+});
+
+
+export const getAllBloodBanks = createAsyncThunk("get/getAllBloodBanks", async (data: any) => {
+    const response = await fetch(`${API_ROUTE}/admin/GetAllBloodBanks`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
+        body: JSON.stringify(data)
+    });
+    const res = await response.json();
+    return res;
+})
+
 export const mainSlice = createSlice({
     name: "main",
     initialState: {
@@ -90,8 +143,22 @@ export const mainSlice = createSlice({
         pingData: {},
         pingDataLoading: false,
 
+
+        adminDashData: [],
+        adminDashDataLoading: false,
+
+
         drawerOpen: false,
         drawerData: {},
+
+        allUsersData: [],
+        allUsersDataLoading: false,
+
+        bloodRequestsData: [],
+        bloodRequestsDataLoading: false,
+
+        bloodBankData: [],
+        bloodBankDataLoading: false,
 
         userName: "",
 
@@ -162,6 +229,46 @@ export const mainSlice = createSlice({
                 state.pingData = action.payload;
                 state.pingDataLoading = false;
             })
+
+
+            .addCase(getAdminDash.pending, (state) => {
+                state.adminDashDataLoading = true;
+            })
+            .addCase(getAdminDash.fulfilled, (state, action) => {
+                state.adminDashData = action.payload;
+                state.adminDashDataLoading = false;
+            })
+
+            .addCase(getAllUsersAdmin.pending, (state) => {
+                state.allUsersDataLoading = true;
+            }
+            )
+            .addCase(getAllUsersAdmin.fulfilled, (state, action) => {
+                state.allUsersData = action.payload;
+                state.allUsersDataLoading = false;
+            })
+
+            .addCase(getAllBloodRequests.pending, (state) => {
+                state.bloodRequestsDataLoading = true;
+            })
+            .addCase(getAllBloodRequests.fulfilled, (state, action) => {
+                state.bloodRequestsData = action.payload;
+                state.bloodRequestsDataLoading = false;
+            })
+
+            .addCase(getAllBloodRequests.rejected, (state) => {
+                state.bloodRequestsDataLoading = false;
+            })
+
+            .addCase(getAllBloodBanks.pending, (state) => {
+                state.bloodBankDataLoading = true;
+            })
+
+            .addCase(getAllBloodBanks.fulfilled, (state, action) => {
+                state.bloodBankData = action.payload;
+                state.bloodBankDataLoading = false;
+            })
+
 
     },
 });

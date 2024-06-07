@@ -1,0 +1,32 @@
+.stat__card {
+    margin-right: 10px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    display: flex;
+    align-items: center;
+
+}
+
+.left__item {
+    margin-right: 20px;
+}
+
+.left__item svg {
+    font-size: 40px;
+    color: #000000;
+}
+
+.stat__name h3 {
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.stat__value h3 {
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+
+    font-weight: 600;
+    color: #000000;
+}
