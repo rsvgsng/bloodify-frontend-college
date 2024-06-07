@@ -12,7 +12,7 @@ import BloodbankPage from './pages/LoggedInPages/BloodbankPage'
 import RequestBloodPage from './pages/LoggedInPages/RequestBloodPage'
 import { Toaster } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
-import { getAdminDash, getAllBloodBanks, getAllBloodRequests, getAllUsersAdmin, getAmbulancesAdmin, getBloodRequest, getCampaginsAdmin, getPing, setUsername } from './features/mainSlice'
+import { getAdminDash, getAllBloodBanks, getAllBloodRequests, getAllUsersAdmin, getAmbulancesAdmin, getBloodRequest, getCampaginsAdmin, getCampaginsUser, getPing, setUsername } from './features/mainSlice'
 export let isLoggedin = localStorage.getItem('token') ? true : false
 import { jwtDecode } from "jwt-decode";
 import CampaignPage from './pages/LoggedInPages/CampaignPage'
@@ -49,6 +49,7 @@ function App() {
 
         if (role === 'user') {
           dispatch(getBloodRequest())
+          dispatch(getCampaginsUser())
           dispatch(setUsername(jwtDecode(localStorage.getItem("token")).userName))
           return setView('user')
         }

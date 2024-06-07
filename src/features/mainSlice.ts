@@ -151,6 +151,19 @@ export const getAmbulancesAdmin = createAsyncThunk("get/getAmbulancesAdmin", asy
 })
 
 
+export const getCampaginsUser = createAsyncThunk("get/getCampaginsUser", async (data: any) => {
+    const response = await fetch(`${API_ROUTE}/main/getCampaigns`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
+        body: JSON.stringify(data)
+    });
+    const res = await response.json();
+    return res;
+});
+
 
 
 export const mainSlice = createSlice({
@@ -195,6 +208,11 @@ export const mainSlice = createSlice({
 
         AdminAmbulanceData: [],
         AdminAmbulanceDataLoading: false,
+
+        UserCampaignsData: [],
+        UserCampaignsDataLoading: false,
+
+
 
 
         userName: "",
@@ -330,6 +348,19 @@ export const mainSlice = createSlice({
             .addCase(getAmbulancesAdmin.fulfilled, (state, action) => {
                 state.AdminAmbulanceData = action.payload;
                 state.AdminAmbulanceDataLoading = false;
+            })
+
+            .addCase(getAmbulancesAdmin.rejected, (state) => {
+                state.AdminAmbulanceDataLoading = false;
+            })
+
+            .addCase(getCampaginsUser.pending, (state) => {
+                state.UserCampaignsDataLoading = true;
+            })
+
+            .addCase(getCampaginsUser.fulfilled, (state, action) => {
+                state.UserCampaignsData = action.payload;
+                state.UserCampaignsDataLoading = false;
             })
 
     },
