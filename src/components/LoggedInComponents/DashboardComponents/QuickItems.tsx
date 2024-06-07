@@ -31,11 +31,7 @@ let ql = [
         icon: <FaAmbulance />,
         link: '/Ambulances'
     },
-    {
-        name: "Read News",
-        icon: <FaNewspaper />,
-        link: '/News'
-    },
+
 
     {
         name: "Upcoming Campaigns",

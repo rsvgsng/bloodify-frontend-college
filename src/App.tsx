@@ -7,10 +7,8 @@ import LoginPage from './pages/LoginPage'
 import AboutPage from './pages/AboutPage'
 import DashboardPage from './pages/LoggedInPages/DashboardPage'
 import AmbulancesPage from './pages/LoggedInPages/AmbulancesPage'
-import NewsPage from './pages/LoggedInPages/NewsPage'
 import SearchBloodPage from './pages/LoggedInPages/SearchBloodPage'
 import BloodbankPage from './pages/LoggedInPages/BloodbankPage'
-import SingleNewsPage from './pages/LoggedInPages/SingleNewsPage'
 import RequestBloodPage from './pages/LoggedInPages/RequestBloodPage'
 import { Toaster } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
@@ -108,8 +106,6 @@ function App() {
           <Route path="/" element={<DashboardPage />} />
           <Route path="/SearchBlood" element={<SearchBloodPage />} />
           <Route path="/Ambulances" element={<AmbulancesPage />} />
-          <Route path="/News" element={<NewsPage />} />
-          <Route path="/News/:id" element={<SingleNewsPage />} />
           <Route path="/BloodRequest" element={<RequestBloodPage />} />
           <Route path="/BloodBank" element={<BloodbankPage />} />
           <Route path="/Campaigns" element={<CampaignsPage />} />
